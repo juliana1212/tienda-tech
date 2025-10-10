@@ -1,15 +1,17 @@
-//El controlador recibe las peticiones.
-//Cuando entre a la ruta /auth, muestra el mensaje que viene del servicio.
-//Así pruebo que todo está conectado bien.
-import { Controller, Get } from '@nestjs/common';
+// Autor: Juliana Casas
+// Descripción: Controlador que maneja las rutas de autenticación.
+// Permite que un usuario inicie sesión y reciba su token JWT.
+
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get()
-  obtenerMensaje(): string {
-    return this.authService.getMessage();
+  // Ruta para login
+  @Post('login')
+  async login(@Body() body: { email: string; password: string }) {
+    return this.authService.login(body.email, body.password);
   }
 }
