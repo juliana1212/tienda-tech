@@ -1,34 +1,30 @@
 // Autor: Juliana Casas
 // Descripción: Este archivo carga los módulos principales del proyecto
-// Aquí se configura la base de datos usando las variables del archivo .env
+// Aquí se configura la base de datos de Railway usando las variables del archivo .env
+// Se usa la URL completa (DB_URL) para evitar errores de conexión
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
-    // Carga las variables del archivo .env
+    // Carga global de variables de entorno (.env)
     ConfigModule.forRoot({
       isGlobal: true,
     }),
 
-    // Configura la base de datos MySQL con TypeORM
+    // Conexión con la base de datos MySQL (Railway)
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '3306'),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
-      entities: [User],
-      synchronize: true, // Crea automáticamente las tablas según las entidades
+      url: process.env.DB_URL, // usa la URL completa de conexión
+      autoLoadEntities: true, // carga automáticamente todas las entidades
+      synchronize: true, // crea las tablas automáticamente en desarrollo
     }),
 
-    // Módulos del proyecto
+    // Módulos principales
     AuthModule,
     UsersModule,
   ],
