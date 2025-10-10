@@ -15,15 +15,15 @@ Body:
   "role": "CUSTOMER"
 }
 
-Login
-
-POST /auth/login
-Body:
 
 Login
 
 POST /auth/login
 Body:
+{
+  "email": "juliana@gmail.com",
+  "password": "123456"
+}
 
 Ruta protegida
 
