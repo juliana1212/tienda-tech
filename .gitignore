@@ -1,8 +1,11 @@
-# Node
+
+# Dependencias
 node_modules/
+
+# Archivos compilados
 dist/
 
-# Env file
+# Archivos de entorno
 .env
 .env.local
 .env.development
@@ -14,6 +17,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# IDEs
+# Configuración de IDEs
 .vscode/
 .idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
