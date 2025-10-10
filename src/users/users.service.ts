@@ -2,36 +2,50 @@
 // Aquí se crea un nuevo usuario y se guarda en la base de datos.
 // También se encripta la contraseña antes de guardar para mayor seguridad.
 
+
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserAlreadyExistsException } from '../common/exceptions/user_already_exists.exception';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>, // permite acceder a la tabla de usuarios
+    private readonly userRepository: Repository<User>,
   ) {}
 
-  // Esta función crea un nuevo usuario
+  // Crear usuario: valida correo único y encripta contraseña
   async create(createUserDto: CreateUserDto): Promise<User> {
-    // Ciframos la contraseña antes de guardar
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    // verificar si ya existe un usuario con ese correo
+    const exists = await this.userRepository.findOne({
+      where: { email: createUserDto.email },
+    });
+    if (exists) {
+      throw new UserAlreadyExistsException();
+    }
 
-    // Creamos el nuevo usuario con los datos del DTO
+    // encriptar contraseña
+    const hashed = await bcrypt.hash(createUserDto.password, 10);
+
     const newUser = this.userRepository.create({
-      ...createUserDto,
-      password: hashedPassword,
+      name: createUserDto.name,
+      email: createUserDto.email,
+      password: hashed,
+      role: createUserDto.role,
     });
 
-    // Guardamos el usuario en la base de datos
-    return this.userRepository.save(newUser);
+    const saved = await this.userRepository.save(newUser);
+
+    // opcional: no devolver la contraseña
+    delete (saved as any).password;
+    return saved;
   }
 
-  // Esta función busca un usuario por su correo util para el login
+  // buscar por correo (se usa en login)
   async findByEmail(email: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { email } });
   }
