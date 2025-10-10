@@ -18,8 +18,7 @@ Body:
 
 Login
 
-POST /auth/login
-Body:
+POST /auth/login 
 {
   "email": "juliana@gmail.com",
   "password": "123456"
