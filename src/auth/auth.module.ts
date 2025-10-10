@@ -1,13 +1,21 @@
 // Autor: Juliana Casas
-// Descripción: Módulo base de autenticación Servirá para el login y registro (RF-001).
+// Descripción: Módulo que agrupa los componentes de autenticación
+// Usa JwtModule para generar y validar tokens JWT
 
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [UsersModule],
+  imports: [
+    UsersModule,
+    JwtModule.register({
+      secret: 'secreto-super-seguro', // Puedes moverlo a .env después
+      signOptions: { expiresIn: '1h' },
+    }),
+  ],
   controllers: [AuthController],
   providers: [AuthService],
 })

@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
-//Aquí solo estoy probando que el servicio funciona.
-//Cuando lo llame desde el controlador, debe mostrar el mensaje “Funciona el servicio de Auth”.
+//Aquí solo estoy probando que el servicio funciona
+//Cuando lo llame desde el controlador, debe mostrar el mensaje ffunciona el servicio de Auth
 const common_1 = require("@nestjs/common");
 let AuthService = class AuthService {
     getMessage() {
