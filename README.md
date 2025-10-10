@@ -15,10 +15,9 @@ Body:
   "role": "CUSTOMER"
 }
 
+login Post/auth/login
 
-Login
 
-POST /auth/login 
 {
   "email": "juliana@gmail.com",
   "password": "123456"
