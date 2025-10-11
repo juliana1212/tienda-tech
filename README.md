@@ -13,7 +13,7 @@ Body:
   "email": "juliana@gmail.com",
   "password": "123456",
   "role": "CUSTOMER"
-}```
+}
 
 login Post/auth/login
 
