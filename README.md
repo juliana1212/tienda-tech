@@ -32,9 +32,9 @@ Authorization: Bearer <token>
 
 ## Módulo de Catálogo y Productos (Natalia Flórez)
 
-###Categorías
+### Categorías
 
-####Crear una nueva categoría (solo ADMIN)
+#### Crear una nueva categoría (solo ADMIN)
 POST /categories
 Body:
 {
@@ -42,28 +42,22 @@ Body:
   "description": "Portátiles y notebooks para trabajo y estudio"
 }
 
-####Listar todas las categorías
+#### Listar todas las categorías
 GET /categories
 
-####Obtener una categoría por ID
+#### Obtener una categoría por ID
 GET /categories/:id
 
-
-####Editar una categoría (solo ADMIN)
+#### Editar una categoría (solo ADMIN)
 PUT /categories/:id
 
-####Eliminar una categoría (solo ADMIN)
+#### Eliminar una categoría (solo ADMIN)
 DELETE /categories/:id
 
-###Productos
 
-####Listar todos los productos
-GET /products
+### Productos
 
-####Obtener un producto por ID
-GET /products/:id
-
-####Crear un nuevo producto (solo ADMIN)
+#### Crear un nuevo producto (solo ADMIN)
 POST /products
 Body:
 {
@@ -74,8 +68,14 @@ Body:
   "categories": [1]
 }
 
-####Editar un producto (solo ADMIN)
+#### Listar todos los productos
+GET /products
+
+#### Obtener un producto por ID
+GET /products/:id
+
+#### Editar un producto (solo ADMIN)
 PUT /products/:id
 
-####Eliminar un producto (solo ADMIN)
+#### Eliminar un producto (solo ADMIN)
 DELETE /products/:id
