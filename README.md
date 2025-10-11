@@ -28,6 +28,8 @@ Ruta protegida
 GET /users/perfil
 Authorization: Bearer <token>
 
+
+
 ## Módulo de Catálogo y Productos (Natalia Flórez)
 
 ###Categorías
