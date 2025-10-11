@@ -14,15 +14,15 @@ Body:
   "password": "123456",
   "role": "CUSTOMER"
 }
-
+```
 login Post/auth/login
 
-```
+```json
 {
   "email": "juliana@gmail.com",
   "password": "123456"
-}```
-
+}
+```
 Ruta protegida
 
 GET /users/perfil
@@ -37,10 +37,12 @@ Authorization: Bearer <token>
 #### Crear una nueva categoría (solo ADMIN)
 POST /categories
 Body:
-```{
+```json
+{
   "name": "Computadores",
   "description": "Portátiles y notebooks para trabajo y estudio"
-}```
+}
+```
 
 #### Listar todas las categorías
 GET /categories
@@ -60,13 +62,15 @@ DELETE /categories/:id
 #### Crear un nuevo producto (solo ADMIN)
 POST /products
 Body:
-```{
+```json
+{
   "name": "Laptop Lenovo IdeaPad 3",
   "description": "Laptop con procesador Ryzen 5 y 8GB RAM",
   "price": 2450000,
   "stock": 15,
   "categories": [1]
-}```
+}
+```
 
 #### Listar todos los productos
 GET /products
