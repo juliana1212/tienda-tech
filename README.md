@@ -36,6 +36,7 @@ Authorization: Bearer <token>
 
 #### Crear una nueva categoría (solo ADMIN)
 POST /categories
+
 Body:
 ```json
 {
@@ -61,6 +62,7 @@ DELETE /categories/:id
 
 #### Crear un nuevo producto (solo ADMIN)
 POST /products
+
 Body:
 ```json
 {
