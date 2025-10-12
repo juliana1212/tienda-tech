@@ -85,3 +85,52 @@ PUT /products/:id
 
 #### Eliminar un producto (solo ADMIN)
 DELETE /products/:id
+
+
+## Módulo de carrito y órdenes (Angie Diaz Abaunza)
+> 🔒 Todas las rutas de este módulo requieren autenticación con token JWT (Bearer Token).
+
+### Carrito
+
+#### Ver carrito
+GET /cart
+
+#### Agregar producto al carrito (solo CUSTOMER)
+POST /cart/items
+
+Body:
+```json
+{
+  "productId": 5,
+  "quantity": 2
+}
+```
+
+#### Actualizar cantidad de un producto (solo CUSTOMER)
+PATCH /cart/items/:itemId
+(Reemplazar :itemId por el id real del item a actualizar)
+
+Body:
+```json
+{
+  "quantity": 5
+}
+```
+
+#### Eliminar producto del carrito (solo CUSTOMER)
+DELETE /cart/items/:itemId
+(Reemplazar :itemId por el id real del item a borrar)
+
+#### Ordenes
+
+#### Crear una orden desde el carrito (solo CUSTOMER)
+POST /orders
+
+#### Ver todas las órdenes (solo CUSTOMER)
+GET /orders
+
+#### Ver una orden específica por ID (solo CUSTOMER)
+GET /orders/:id
+(Reemplazar :itemId por el id real del item a consultar)
+
+
