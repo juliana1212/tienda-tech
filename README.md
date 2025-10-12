@@ -88,7 +88,7 @@ DELETE /products/:id
 
 
 ## Módulo de carrito y órdenes (Angie Diaz Abaunza)
-> 🔒 Todas las rutas de este módulo requieren autenticación con token JWT (Bearer Token).
+Todas las rutas de este módulo requieren autenticación con token JWT (Bearer Token).
 
 ### Carrito
 
