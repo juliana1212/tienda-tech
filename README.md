@@ -121,7 +121,7 @@ Body:
 DELETE /cart/items/:itemId
 (Reemplazar :itemId por el id real del item a borrar)
 
-#### Ordenes
+### Ordenes
 
 #### Crear una orden desde el carrito (solo CUSTOMER)
 POST /orders
