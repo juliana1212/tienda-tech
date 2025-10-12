@@ -11,7 +11,7 @@ Body:
 {
   "name": "Juliana Casas",
   "email": "juliana@gmail.com",
-  "password": "123456",
+  "password": "******",
   "role": "CUSTOMER"
 }
 ```
@@ -20,7 +20,7 @@ login Post/auth/login
 ```json
 {
   "email": "juliana@gmail.com",
-  "password": "123456"
+  "password": "*****"
 }
 ```
 Ruta protegida

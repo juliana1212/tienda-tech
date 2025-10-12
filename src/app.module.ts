@@ -12,6 +12,9 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 
+import { CartsModule } from './carts/carts.module';
+import { OrdersModule } from './orders/orders.module';
+
 @Module({
   imports: [
     // Carga global de variables de entorno (.env)
@@ -34,6 +37,9 @@ import { CategoriesModule } from './categories/categories.module';
         // Módulos del catálogo (Natalia)
     ProductsModule,
     CategoriesModule,
+        // Módulos de carrito y ordenes
+    CartsModule,
+    OrdersModule,
 
   ],
 })
