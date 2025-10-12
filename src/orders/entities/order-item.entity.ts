@@ -19,12 +19,12 @@ export class OrderItem {
   @Column({ type: 'varchar', length: 150 })
   productName!: string;
 
-  @Column({ type: 'decimal', precision: 12, scale: 2 })
-  unitPrice!: string;
+  @Column('decimal', { precision: 10, scale: 2 })
+  unitPrice: number;
 
   @Column({ type: 'int' })
   quantity!: number;
 
-  @Column({ type: 'decimal', precision: 12, scale: 2 })
-  lineTotal!: string;
+  @Column('decimal', { precision: 10, scale: 2 })
+  lineTotal: number;
 }
