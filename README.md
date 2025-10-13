@@ -134,3 +134,30 @@ GET /orders/:id
 (Reemplazar :itemId por el id real del item a consultar)
 
 
+## Módulo de Reseñas (Natalia Flórez)
+los requisitos para las reseñas son:
+-el usuario debe estar autenticado
+-debe existir una orden con estado "SHIPPED" que tenga el prodcuto que va a reseñar
+-solo se permite una reseña por producto por usuario
+
+### Reseñas
+
+#### Crear una reseña (solo clientes con orden SHIPPED)
+POST /reviews
+
+Body:
+```json
+{
+  "productId": 2,
+  "rating": 5,
+  "comment": "Excelente producto, superó mis expectativas."
+}
+
+```
+
+#### Ver reseñas de un producto
+GET /reviews/product/:id
+
+#### Ver mis reseñas
+GET /reviews/mine
+
