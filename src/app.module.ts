@@ -15,6 +15,9 @@ import { CategoriesModule } from './categories/categories.module';
 import { CartsModule } from './carts/carts.module';
 import { OrdersModule } from './orders/orders.module';
 
+import { ReviewsModule } from './reviews/reviews.module';
+
+
 @Module({
   imports: [
     // Carga global de variables de entorno (.env)
@@ -40,6 +43,9 @@ import { OrdersModule } from './orders/orders.module';
         // Módulos de carrito y ordenes
     CartsModule,
     OrdersModule,
+
+    //Modulo de reseñas (Natalia)
+    ReviewsModule,
 
   ],
 })

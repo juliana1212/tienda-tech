@@ -50,13 +50,13 @@ export class OrdersService {
 
       const order = this.orderRepo.create({
         user,
-        items: [],
         status: 'PENDING',
         total: 0,
       });
       await qr.manager.save(order);
 
       let total = 0;
+      const orderItems: OrderItem[] = [];
 
       for (const item of cart.items) {
         const p = await qr.manager.findOne(Product, { where: { id: item.product.id } });
@@ -68,15 +68,17 @@ export class OrdersService {
         const lineTotal = Number(p.price) * item.quantity;
         total += lineTotal;
 
-        const oi = new OrderItem();
-        oi.order = order;
-        oi.product = p;
-        oi.productName = p.name;
-        oi.unitPrice = Number(p.price);
-        oi.quantity = item.quantity;
-        oi.lineTotal = Number(lineTotal.toFixed(2));
+        const oi = this.orderItemRepo.create({
+          order,
+          product: p,
+          productName: p.name,
+          unitPrice: Number(p.price),
+          quantity: item.quantity,
+          lineTotal: Number(lineTotal.toFixed(2)),
+        });
 
         await qr.manager.save(oi);
+        orderItems.push(oi); 
       }
 
       order.total = Number(total.toFixed(2));
@@ -86,10 +88,15 @@ export class OrdersService {
       await qr.manager.delete('cart_items', { cart: { id: cart.id } });
 
       await qr.commitTransaction();
-      return await this.orderRepo.findOne({
+
+      const savedOrder = await this.orderRepo.findOne({
         where: { id: order.id },
         relations: ['items', 'items.product'],
       });
+
+      savedOrder.items = orderItems;
+
+      return savedOrder;
     } catch (e) {
       await qr.rollbackTransaction();
       throw e;
@@ -110,7 +117,10 @@ export class OrdersService {
   }
 
   async getOne(userEmail: string, id: number): Promise<Order> {
-    const order = await this.orderRepo.findOne({ where: { id }, relations: ['user', 'items', 'items.product'] });
+    const order = await this.orderRepo.findOne({
+      where: { id },
+      relations: ['user', 'items', 'items.product'],
+    });
     if (!order) throw new NotFoundException('orden no encontrada');
     if (order.user.email !== userEmail)
       throw new ForbiddenException('no puedes ver órdenes de otros');
